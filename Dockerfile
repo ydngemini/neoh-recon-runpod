@@ -40,7 +40,8 @@ RUN chmod +x /usr/local/bin/pipeline.sh
 
 # Handler at container root + CMD running it from root — the convention the RunPod
 # Hub validator resolves through the Dockerfile to confirm runpod.serverless.start().
-COPY handler.py /handler.py
+WORKDIR /
+ADD handler.py .
 
 # RunPod serverless workers start by running the handler; it blocks on the queue.
 CMD ["python3", "-u", "/handler.py"]
