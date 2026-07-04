@@ -1,0 +1,5 @@
+# RunPod serverless worker deps (torch/nerfstudio are installed separately in the
+# Dockerfile so their CUDA index URL isn't applied to these).
+runpod>=1.6.0
+boto3>=1.34.0
+requests>=2.31.0
