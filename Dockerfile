@@ -36,8 +36,11 @@ RUN pip3 install -r /opt/requirements.txt
 
 RUN mkdir -p /work
 COPY pipeline.sh /usr/local/bin/pipeline.sh
-COPY handler.py  /opt/handler.py
 RUN chmod +x /usr/local/bin/pipeline.sh
 
+# Handler at container root + CMD running it from root — the convention the RunPod
+# Hub validator resolves through the Dockerfile to confirm runpod.serverless.start().
+COPY handler.py /handler.py
+
 # RunPod serverless workers start by running the handler; it blocks on the queue.
-CMD ["python3", "-u", "/opt/handler.py"]
+CMD ["python3", "-u", "/handler.py"]
